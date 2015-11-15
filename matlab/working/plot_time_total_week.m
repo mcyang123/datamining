@@ -4,7 +4,6 @@ function [ ] = plot_time_total_week( input ,w)
 %%横坐标为时刻，纵坐标为人数，将某个星期几的线画在一起 
  x_axis = zeros(1,16);                                                                                                      %初始化话横坐标数组 
  x_axis(:,:) = NaN;
- figure;
  hold on;
  index = find( input.week== w) ;                                                                                               %找到某个星期几的下标，数字代表星期几
  D1 =  input.Date(1);                                             %D1指向后一个记录的日期，D2指向当前记录日期，对比两者是否相等，将相同日期放在一起
@@ -12,8 +11,8 @@ function [ ] = plot_time_total_week( input ,w)
      D2 =   input.Date(i);                                          %记录当前日期
      if D1~=D2 | i ==length(index)                                                                        %前后两个日期不同，则表明以上数据为同一日期，已经记录了0-24小时的人数，可以将图像画出
          D1 = D2;
-         if D2==910
-            plot([6:21],x_axis,'r');
+         if D2==908
+            plot([6:21],x_axis,'c');
          else
             plot([6:21],x_axis);
          end

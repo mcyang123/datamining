@@ -4,7 +4,7 @@ function dataout =train_function_single(datainput)
 %dataout  为输出的特征点。大小为1*1
     o = std(datainput);
     u = mean(datainput);
-    index = find(datainput>u+3*o | datainput<u-3*o);
+    index = find(datainput>u+2*o | datainput<u-2*o);
     datainput(index) = [];
     dataout  = sum(datainput)/length(datainput);
 end
