@@ -22,7 +22,7 @@ function varargout = GUI_traffic_data_mining(varargin)
 
 % Edit the above text to modify the response to help GUI_traffic_data_mining
 
-% Last Modified by GUIDE v2.5 12-Nov-2015 15:52:47
+% Last Modified by GUIDE v2.5 14-Nov-2015 15:22:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -51,6 +51,11 @@ function GUI_traffic_data_mining_OpeningFcn(hObject, eventdata, handles, varargi
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to GUI_traffic_data_mining (see VARARGIN)
+handles.line = get(handles.line_name,'Vaule');
+handles.p_method = get(handles.plot_method,'Vaule');
+handles.D  = get(handles.Date,'Vaule');
+handles.W  = get(handles.week,'Vaule');
+handles.T_method  = get(handles.train_method,'Vaule');
 
 % Choose default command line output for GUI_traffic_data_mining
 handles.output = hObject;
@@ -119,19 +124,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in date.
-function date_Callback(hObject, eventdata, handles)
-% hObject    handle to date (see GCBO)
+% --- Executes on selection change in Date.
+function Date_Callback(hObject, eventdata, handles)
+% hObject    handle to Date (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns date contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from date
+% Hints: contents = cellstr(get(hObject,'String')) returns Date contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from Date
 
 
 % --- Executes during object creation, after setting all properties.
-function date_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to date (see GCBO)
+function Date_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Date (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -216,3 +221,12 @@ function train_method_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in togglebutton1.
+function togglebutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to togglebutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of togglebutton1

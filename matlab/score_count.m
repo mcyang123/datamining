@@ -4,6 +4,6 @@ function score= score_count( real, estimate )
 dev = abs(real-estimate)./real;
 dev(dev>0.3) = 0.3;
 f = (1-dev./0.3)*10;
-f = sum(f)/(10*length(f));
+[r ,c] = size(f);
+score = sum(sum(f))/(10*r*c);
 end
-
