@@ -5,7 +5,7 @@ Created on Tue Nov 10 08:11:16 2015
 @author: mc
 """
 import xlwt
-f_d = open(r'D:\project\datamining\data\281_Dealtime.csv')
+f_d = open(r'D:\project\datamining\data\15_Dealtime.csv')
 f_w = open(r'D:\project\datamining\data\weather.csv')
 temp = f_w.read()
 L = temp.split('\n')
@@ -16,7 +16,9 @@ j = 1
 workbook = xlwt.Workbook()
 sheet = workbook.add_sheet('0')
 for i,s in enumerate(f_d):
-    [time,num]=s.split('\t',1)
+    if i==0:
+        s = s[3:len(s)]
+    [time,num]=s.split(',',1)
     num = num.rstrip()
     years = time[0:4]
     month = time[4:6]
@@ -49,7 +51,6 @@ for i,s in enumerate(f_d):
         week = '3'
     sheet.write(i,0,int(years))
     sheet.write(i,1,int(date))
-    #sheet.write(i,2,int(day))
     sheet.write(i,2,int(hour))
     sheet.write(i,3,int(week))
     sheet.write(i,4,int(weather))
@@ -57,7 +58,7 @@ for i,s in enumerate(f_d):
     
 f_d.close()
 f_w.close()
-workbook.save(r'D:\project\datamining\data\year_month_day_hour_week_total_281.xls')
+workbook.save(r'D:\project\datamining\data\year_month_day_hour_week_total_15.xls')
 
 
 

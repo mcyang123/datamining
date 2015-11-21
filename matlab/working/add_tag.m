@@ -11,4 +11,3 @@ for i=1:length(tag_day)
     output.tag(index) = 1;
 end
 end
-

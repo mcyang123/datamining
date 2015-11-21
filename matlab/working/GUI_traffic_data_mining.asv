@@ -22,7 +22,7 @@ function varargout = GUI_traffic_data_mining(varargin)
 
 % Edit the above text to modify the response to help GUI_traffic_data_mining
 
-% Last Modified by GUIDE v2.5 21-Nov-2015 17:46:59
+% Last Modified by GUIDE v2.5 21-Nov-2015 17:11:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,11 +59,11 @@ for i = 4:length(filename)
 end
 handles.fname = fname;
 set(handles.line_name,'String',fname);                                           %显示文件名以供选择
-handles.ReadD = get(handles.line_name,'Value');  
-% handles.p_method = get(handles.plot_method,'Vaule');
-% handles.D  = get(handles.Date,'Vaule');
-% handles.W  = get(handles.week,'Vaule');
-% handles.T_method  = get(handles.train_method,'Vaule');
+handles.ReadD = 1;
+handles.p_method = get(handles.plot_method,'Vaule');
+handles.D  = get(handles.Date,'Vaule');
+handles.W  = get(handles.week,'Vaule');
+handles.T_method  = get(handles.train_method,'Vaule');
 
 % Choose default command line output for GUI_traffic_data_mining
 handles.output = hObject;
@@ -92,6 +92,7 @@ function line_name_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles.ReadD = get(handles.line_name,'Value');
+
 % Hints: contents = cellstr(get(hObject,'String')) returns line_name contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from line_name
 
@@ -245,19 +246,17 @@ function readdata_Callback(hObject, eventdata, handles)
 % hObject    handle to readdata (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-Fname = handles.fname(handles.ReadD,:);             %获取要读取的文件路径
-Fname2 = strcat('D:\project\datamining\data\python2matlab\',Fname);
-D = xlsread(Fname2);                                            %读取文件数据
+Fname = handles.fname(handles.ReadD);             %获取尧都区的文件路径
+D = xlsread(Fname);                                            %读取文件数据
 data.Date = D(:,2);                                               %将数据拆分成结构类型
 data.Hour = D(:,3);
 data.week = D(:,4);
 data.weather = D(:,5);
 data.total = D(:,6);
-index = find(data.Hour>21 | data.Hour<6 ) ;         %去掉21到6时的数据
+index = find(data.Hour>21 | data.Hour<6           %去掉21到6时的数据
 data.Date(index) = [];
 data.Hour(index) = [];
 data.week(index) = [];
 data.weather(index) = [];
 data.total (index) = [];
-Fmat = strcat(Fname(1:(length(Fname)-4)),'mat');
-save(Fmat,'data');
+Fname((length(Fname)-3):end) = [];
