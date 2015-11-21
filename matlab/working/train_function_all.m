@@ -1,4 +1,4 @@
-function [ output ] = train_function_all( input,flag)
+function [ output ] = train_function_all( input,flag,fun)
 %%将输入的所有数据训练成一个7*16的数组，以此作为估计值 时刻只算6-21时
 %input为输入数据，类型为结构，包含Date、Hour、week、weather、total；output为输出数据，大小为7*24,函数默认调用train_function_single()为训练函数
 %%
@@ -8,11 +8,11 @@ function [ output ] = train_function_all( input,flag)
          for h  = 6:21                                                  %遍历6-21时
              h_i = find(input.Hour ==h);                        %找出第h时刻的数据下标
              w_i = find(input.week == w);                      %找出星期w的数据下标
-             t_i = find(input.tag == 0);                        %找出正常状态的数据下标
+             t_i = find(input.tag == 0);                          %找出正常状态的数据下标
              wh_i = intersect(w_i,h_i);   
              index = intersect(wh_i,t_i);                           %某星期几，某时刻下，正常状态的日期的数据
              datain = input.total(index);                          %找出所有星期w，h时刻正常状态的数据
-             dataout = train_function_single(datain);      %训练单一维数据
+             dataout = fun(datain);                                %训练单一维数据
              output(w,h-5) = dataout;                           %记录得到的星期w、h时刻的估计点
          end
      end
@@ -31,7 +31,7 @@ function [ output ] = train_function_all( input,flag)
         h_i = find(input.Hour == h);                              %将数据按时刻值分开
         index = intersect(h_i,wt_i);                                 %放假日期下，某时刻的数据的下标
         datain = input.total(index);                               %找到数据点
-        dataout = train_function_single(datain);               %训练数据
+        dataout = fun(datain);                                      %训练数据
         output(1,h-5) = dataout;                                     %记录数据
     end
 
@@ -49,7 +49,7 @@ function [ output ] = train_function_all( input,flag)
         h_i = find(input.Hour == h);                               %将数据按时刻值分开
         index = intersect(h_i,wt_i);                                   %上班日期下，某时刻的数据的下标
         datain = input.total(index);                                 %找到数据点
-        dataout = train_function_single(datain);               %训练数据
+        dataout = fun(datain);                                       %训练数据
         output(2,h-5) = dataout;                                     %记录数据
     end
     %------------------------------------------------------------------------------

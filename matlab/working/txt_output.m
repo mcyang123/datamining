@@ -1,4 +1,4 @@
-function [] = txt_output( tra15,tra10 )
+function [] = txt_output( tra15,tra10,t_path )
 %%该脚本用于将预测结果写入txt中调用脚本前，确保数据顺序为565,281，数据自动保存成txt文件
 %
 D =['0101';'0102';'0103';'0104';'0105';'0106';'0107'];
@@ -6,8 +6,8 @@ H =['06';'07';'08';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'19';'20';'
 d= 1;
 h = 1;
 line = '线路15,';
-data = [reshape(tra565',[],1) ; reshape(tra281',[],1)];
-f = fopen('gd_predict.txt','wt');
+data = [reshape(tra15',[],1) ; reshape(tra10',[],1)];
+f = fopen(t_path,'wt');
 for i = 1:length(data)
     
         if h>=17

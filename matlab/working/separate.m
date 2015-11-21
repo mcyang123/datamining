@@ -8,11 +8,12 @@ function [ output] = separate( input_data,sep,flag )
 if flag ==1                                                                             %输出seq代表日期的数据
     for i = 1: length(sep)                                                          %找到所有与seq一致的数据，将其复制到output中
         date_index = find(input_data.Date ==sep(i));                 
-        output.Date = input_data.Date(date_index);
-        output.week = input_data.week(date_index);
-        output.Hour = input_data.Hour(date_index);
-        output.weather = input_data.weather(date_index);
-        output.total = input_data.total(date_index);
+        output.Date(i,:) = input_data.Date(date_index);
+        output.week(i,:) = input_data.week(date_index);
+        output.Hour(i,:) = input_data.Hour(date_index);
+        output.weather(i,:) = input_data.weather(date_index);
+        output.total(i,:) = input_data.total(date_index);
+        output.tag(i,:) = input_data.tag(date_index);
     end
 elseif flag ==0
     for i = 1: length(sep)
